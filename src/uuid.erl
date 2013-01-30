@@ -89,7 +89,7 @@ uuid1(NodeArg, ClockSeqArg) ->
         %% Use ClockSeq if supplied otherwise Generate random clock sequence.
         case ClockSeqArg of
             null        ->
-                random:seed(now()),
+                random:seed(os:timestamp()),
                 Rnd = random:uniform(2 bsl 14 - 1),
                 <<Rnd:14>>;
             ClockSeqArg ->
@@ -145,7 +145,7 @@ uuid3(_, _) ->
 %% @doc  Create a UUID v4 (random) as a binary
 -spec uuid4() -> uuid().
 uuid4() ->
-    random:seed(now()),
+    random:seed(os:timestamp()),
 
     U0 = random:uniform((2 bsl 32) - 1),
     U1 = random:uniform((2 bsl 16) - 1),
